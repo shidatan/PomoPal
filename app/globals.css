@@ -3,6 +3,14 @@
 
 @font-face {
   font-family: "Helvetica Now Display";
+  src: url("/fonts/HelveticaNowDisplay-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Helvetica Now Display";
   src: url("/fonts/HelveticaNowDisplay-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
@@ -30,8 +38,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-helvetica-now, "Helvetica Now Display", sans-serif);
-  --font-mono: var(--font-helvetica-now, "Helvetica Now Display", sans-serif);
+  --font-sans: var(--font-helvetica-now, "Helvetica Now Display");
+  --font-mono: var(--font-helvetica-now, "Helvetica Now Display");
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -69,15 +77,15 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+  --background: #0D0D0D;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --popover-foreground: #FFFFFF;
+  --primary: #0D0D0D;
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
+  --secondary: #1E1E1E;
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
@@ -143,4 +151,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.rounded-container {
+  @apply border-secondary flex w-1/2 flex-col justify-center rounded-[64px] border-2 bg-black px-10 text-center;
 }
