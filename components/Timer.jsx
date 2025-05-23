@@ -1,9 +1,15 @@
-import { useTimer } from "@/hooks/useTimer";
-import clsx from "clsx";
+"use client";
 
-export const Timer = ({ timerState, setTimerState }) => {
-  const { isPlaying, isWork, currentInterval } = timerState;
-  const { minutes, seconds } = useTimer(timerState, setTimerState);
+import { useTimer } from "@/hooks/useTimer";
+import { TimerStateContext } from "@/hooks/useTimerState";
+import clsx from "clsx";
+import { useContext } from "react";
+
+export const Timer = () => {
+  const { timerState } = useContext(TimerStateContext);
+
+  const { isPlaying, isWork, intervalCount, currentInterval } = timerState;
+  const { minutes, seconds } = useTimer();
 
   return (
     <div
@@ -15,7 +21,9 @@ export const Timer = ({ timerState, setTimerState }) => {
     >
       <div className="flex justify-between">
         <p className="uppercase">{isWork ? "work" : "break"} interval</p>
-        <p>{currentInterval}/6</p>
+        <p>
+          {currentInterval}/{intervalCount}
+        </p>
       </div>
 
       <p

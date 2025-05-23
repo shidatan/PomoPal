@@ -1,13 +1,31 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
+import { TimerStateContext } from "@/hooks/useTimerState";
+import { BREAK_DURATION, INITIAL_TIMER_STATE } from "@/lib/constants";
 import clsx from "clsx";
 import { Pause, Play, RotateCcw } from "lucide-react";
+import { useContext } from "react";
 
-export const MusicPlayer = ({ timerState, setTimerState }) => {
-  const { isPlaying, isWork, secondsLeft } = timerState;
+export const MusicPlayer = () => {
+  const { timerState, setTimerState } = useContext(TimerStateContext);
+
+  const {
+    isPlaying,
+    isWork,
+    intervalCount,
+    workDuration,
+    secondsLeft,
+    musicTrack,
+  } = timerState;
 
   return (
     <div className="rounded-container">
-      <p className="mb-8">No track selected.</p>
+      <p
+        className={`mb-8 ${!musicTrack?.name ? "text-muted-foreground italic" : ""}`}
+      >
+        {musicTrack?.name || "No music track selected."}
+      </p>
 
       <div className="bg-secondary relative mb-12 h-4 rounded-full">
         <div
@@ -21,7 +39,10 @@ export const MusicPlayer = ({ timerState, setTimerState }) => {
           style={{
             width: `${Math.max(
               0,
-              ((secondsLeft / (isWork ? 5 : 5)) * 100).toFixed(2),
+              (
+                (secondsLeft / (isWork ? workDuration : BREAK_DURATION)) *
+                100
+              ).toFixed(2),
             )}%`,
           }}
         ></div>
@@ -46,12 +67,12 @@ export const MusicPlayer = ({ timerState, setTimerState }) => {
           variant="secondary"
           className="h-14 w-14 cursor-pointer rounded-full"
           onClick={() => {
-            setTimerState((prev) => ({
-              isPlaying: false,
-              isWork: true,
-              currentInterval: 1,
-              secondsLeft: 5,
-            }));
+            setTimerState({
+              ...INITIAL_TIMER_STATE,
+              intervalCount,
+              workDuration,
+              secondsLeft: workDuration,
+            });
           }}
         >
           <RotateCcw className="size-8 stroke-1 text-white" />

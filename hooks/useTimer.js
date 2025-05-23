@@ -1,8 +1,18 @@
-import { INITIAL_TIMER_STATE } from "@/lib/constants";
-import { useEffect } from "react";
+import { BREAK_DURATION, INITIAL_TIMER_STATE } from "@/lib/constants";
+import { useContext, useEffect } from "react";
+import { TimerStateContext } from "./useTimerState";
 
-export const useTimer = (timerState, setTimerState) => {
-  const { isPlaying, isWork, currentInterval, secondsLeft } = timerState;
+export const useTimer = () => {
+  const { timerState, setTimerState } = useContext(TimerStateContext);
+
+  const {
+    isPlaying,
+    isWork,
+    intervalCount,
+    currentInterval,
+    workDuration,
+    secondsLeft,
+  } = timerState;
 
   // Update the timer state every second
   useEffect(() => {
@@ -22,13 +32,14 @@ export const useTimer = (timerState, setTimerState) => {
   useEffect(() => {
     if (!isPlaying || secondsLeft !== 0) return;
 
+    // Delay the interval switch to allow for a smoother transition
     const timeout = setTimeout(() => {
       setTimerState((prev) => {
         const nextIsWork = !prev.isWork;
         const nextInterval = prev.isWork
           ? prev.currentInterval
           : prev.currentInterval + 1;
-        const nextSeconds = nextIsWork ? 5 : 5;
+        const nextSeconds = nextIsWork ? workDuration : BREAK_DURATION;
 
         return {
           ...prev,
@@ -42,13 +53,20 @@ export const useTimer = (timerState, setTimerState) => {
     return () => clearTimeout(timeout);
   }, [isPlaying, secondsLeft]);
 
-  // Reset the timer state after 6 intervals
+  // Reset the timer state after the last interval
   useEffect(() => {
-    if (isWork || currentInterval < 6 || secondsLeft > 0) return;
+    if (isWork || currentInterval < intervalCount || secondsLeft > 0) return;
 
     const timeout = setTimeout(() => {
-      setTimerState(INITIAL_TIMER_STATE);
+      setTimerState({
+        ...INITIAL_TIMER_STATE,
+        intervalCount,
+        workDuration,
+        secondsLeft: workDuration,
+      });
     }, 1000);
+
+    return () => clearTimeout(timeout);
   }, [isWork, currentInterval, secondsLeft]);
 
   const minutes = Math.floor(secondsLeft / 60)
