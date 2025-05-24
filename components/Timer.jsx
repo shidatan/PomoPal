@@ -1,15 +1,18 @@
 "use client";
 
 import { useTimer } from "@/hooks/useTimer";
-import { TimerStateContext } from "@/hooks/useTimerState";
+import { TimerStateContext } from "@/context/TimerStateContext";
 import clsx from "clsx";
 import { useContext } from "react";
 
 export const Timer = () => {
   const { timerState } = useContext(TimerStateContext);
 
+  const { countdown, minutes, seconds } = useTimer();
+
   const { isPlaying, isWork, intervalCount, currentInterval } = timerState;
-  const { minutes, seconds } = useTimer();
+
+  const showCountdown = isPlaying && countdown >= 1;
 
   return (
     <div
@@ -30,7 +33,7 @@ export const Timer = () => {
         className="text-center text-[160px]"
         style={{ fontFamily: "Shtozer", fontWeight: 600 }}
       >
-        {minutes}:{seconds}
+        {showCountdown ? countdown : `${minutes}:${seconds}`}
       </p>
     </div>
   );

@@ -9,11 +9,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { SettingsFormContext } from "@/context/SettingsFormContext";
-import { useContext, useRef, useState } from "react";
+import { useResetSettingsForm } from "@/hooks/useResetSettingsForm";
+import { useContext, useRef } from "react";
+import { NumberInput } from "./NumberInput";
 
 export const SettingsForm = ({ setOpen }) => {
   const { form, onSubmit, showFileName } = useContext(SettingsFormContext);
+
   const musicTrackInputRef = useRef(null);
+
+  const { resetForm } = useResetSettingsForm(musicTrackInputRef);
 
   return (
     <Form {...form}>
@@ -22,42 +27,25 @@ export const SettingsForm = ({ setOpen }) => {
         className="space-y-14"
       >
         <div className="space-y-6">
-          <FormField
-            control={form.control}
+          <NumberInput
+            form={form}
             name="intervalCount"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel className="font-normal">Interval count</FormLabel>
-                <FormControl>
-                  <Input
-                    className="border-border focus selection:bg-blue-500"
-                    placeholder="6"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+            label="Interval count"
+            placeholder="6"
           />
 
-          <FormField
-            control={form.control}
-            name="workDuration"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel className="font-normal">
-                  Work duration (minutes)
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    className="border-border focus selection:bg-blue-500"
-                    placeholder="25"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
+          <NumberInput
+            form={form}
+            name="totalWorkMinutes"
+            label="Work duration (minutes)"
+            placeholder="25"
+          />
+
+          <NumberInput
+            form={form}
+            name="totalBreakMinutes"
+            label="Break duration (minutes)"
+            placeholder="5"
           />
 
           <div className="space-y-2">
@@ -106,14 +94,7 @@ export const SettingsForm = ({ setOpen }) => {
             type="button"
             variant="outline"
             className="focus cursor-pointer font-normal"
-            onClick={() => {
-              form.reset();
-
-              // Reset the file input value
-              if (musicTrackInputRef.current) {
-                musicTrackInputRef.current.value = "";
-              }
-            }}
+            onClick={() => resetForm(setOpen)}
           >
             Reset
           </Button>

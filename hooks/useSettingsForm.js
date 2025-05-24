@@ -2,23 +2,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { TimerStateContext } from "./useTimerState";
+import { TimerStateContext } from "../context/TimerStateContext";
+import { INITIAL_TIMER_STATE } from "@/lib/constants";
+
+const positiveIntegerString = z
+  .string()
+  .nonempty("Required")
+  .regex(/^\d+$/, { message: "Must be a whole number" })
+  .refine((val) => parseInt(val, 10) >= 1, {
+    message: "Must be at least 1",
+  });
 
 const formSchema = z.object({
-  intervalCount: z
-    .string()
-    .nonempty("Required")
-    .regex(/^\d+$/, { message: "Must be a whole number" })
-    .refine((val) => parseInt(val, 10) >= 1, {
-      message: "Must be at least 1",
-    }),
-  workDuration: z
-    .string()
-    .nonempty("Required")
-    .regex(/^\d+$/, { message: "Must be a whole number" })
-    .refine((val) => parseInt(val, 10) >= 1, {
-      message: "Must be at least 1",
-    }),
+  intervalCount: positiveIntegerString,
+  totalWorkMinutes: positiveIntegerString,
+  totalBreakMinutes: positiveIntegerString,
   musicTrack: z.union([
     z
       .instanceof(File)
@@ -36,29 +34,36 @@ const formSchema = z.object({
 
 export const useSettingsForm = () => {
   const { setTimerState } = useContext(TimerStateContext);
-  const [ showFileName, setShowFileName ] = useState(false);
+  const [showFileName, setShowFileName] = useState(false);
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       intervalCount: "6",
-      workDuration: "25",
+      totalWorkMinutes: "25",
+      totalBreakMinutes: "5",
       musicTrack: undefined,
     },
     mode: "onChange",
   });
 
   function onSubmit(values, setOpen) {
-    console.log(values);
-    const { intervalCount, workDuration, musicTrack } = values;
+    const { intervalCount, totalWorkMinutes, totalBreakMinutes, musicTrack } =
+      values;
 
-    setTimerState((prev) => ({
-      ...prev,
+    setTimerState({
+      ...INITIAL_TIMER_STATE,
       intervalCount: parseInt(intervalCount, 10),
-      workDuration: parseInt(workDuration, 10) * 60,
-      secondsLeft: parseInt(workDuration, 10) * 60,
+      // totalWorkSeconds: parseInt(totalWorkMinutes, 10) * 60,
+      totalWorkSeconds: 10,
+      // totalBreakSeconds: parseInt(totalBreakMinutes, 10) * 60,
+      totalBreakSeconds: 5,
+      // remainingWorkSeconds: parseInt(totalWorkMinutes, 10) * 60,
+      remainingWorkSeconds: 10,
+      // remainingBreakSeconds: parseInt(totalBreakMinutes, 10) * 60,
+      remainingBreakSeconds: 5,
       musicTrack: musicTrack,
-    }));
+    });
 
     setOpen((prev) => !prev);
     setTimeout(() => setShowFileName(true), 1000);
@@ -67,6 +72,6 @@ export const useSettingsForm = () => {
   return {
     form,
     onSubmit,
-    showFileName
+    showFileName,
   };
 };

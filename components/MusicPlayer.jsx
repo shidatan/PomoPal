@@ -1,23 +1,33 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { TimerStateContext } from "@/hooks/useTimerState";
-import { BREAK_DURATION, INITIAL_TIMER_STATE } from "@/lib/constants";
+import { MusicTrackRefContext } from "@/context/MusicTrackRefContext";
+import { TimerStateContext } from "@/context/TimerStateContext";
+import { useMusicPlayer } from "@/hooks/useMusicPlayer";
+import { INITIAL_TIMER_STATE } from "@/lib/constants";
 import clsx from "clsx";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import { useContext } from "react";
 
 export const MusicPlayer = () => {
+  const { musicTrackRef } = useContext(MusicTrackRefContext);
   const { timerState, setTimerState } = useContext(TimerStateContext);
+
+  useMusicPlayer();
 
   const {
     isPlaying,
     isWork,
     intervalCount,
-    workDuration,
-    secondsLeft,
+    totalWorkSeconds,
+    totalBreakSeconds,
+    remainingWorkSeconds,
+    remainingBreakSeconds,
     musicTrack,
   } = timerState;
+
+  const remaining = isWork ? remainingWorkSeconds : remainingBreakSeconds;
+  const total = isWork ? totalWorkSeconds : totalBreakSeconds;
 
   return (
     <div className="rounded-container">
@@ -37,13 +47,7 @@ export const MusicPlayer = () => {
             },
           )}
           style={{
-            width: `${Math.max(
-              0,
-              (
-                (secondsLeft / (isWork ? workDuration : BREAK_DURATION)) *
-                100
-              ).toFixed(2),
-            )}%`,
+            width: `${Math.max(0, ((remaining / total) * 100).toFixed(2))}%`,
           }}
         ></div>
       </div>
@@ -70,9 +74,17 @@ export const MusicPlayer = () => {
             setTimerState({
               ...INITIAL_TIMER_STATE,
               intervalCount,
-              workDuration,
-              secondsLeft: workDuration,
+              totalWorkSeconds,
+              totalBreakSeconds,
+              remainingWorkSeconds: totalWorkSeconds,
+              remainingBreakSeconds: totalBreakSeconds,
+              musicTrack,
             });
+
+            if (musicTrackRef.current) {
+              musicTrackRef.current.pause();
+              musicTrackRef.current.currentTime = 0;
+            }
           }}
         >
           <RotateCcw className="size-8 stroke-1 text-white" />

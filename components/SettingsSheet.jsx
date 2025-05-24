@@ -9,15 +9,19 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { TimerStateContext } from "@/context/TimerStateContext";
 import { Settings } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 export const SettingsSheet = () => {
+  const { setTimerState } = useContext(TimerStateContext);
   const [open, setOpen] = useState(false);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger>
+      <SheetTrigger
+        onClick={() => setTimerState((prev) => ({ ...prev, isPlaying: false }))}
+      >
         <Settings className="size-6 cursor-pointer text-white" />
       </SheetTrigger>
       <SheetContent className="p-6">
