@@ -8,8 +8,11 @@ export const useTimer = () => {
 
   const popmusicTrackRef = useRef(null);
   const bellmusicTrackRef = useRef(null);
-  const timeUpmusicTrackRef = useRef(null);
+  const timeUpMusicTrackRef = useRef(null);
+  const timeUPlaybackCountRef = useRef(0);
   const endmusicTrackRef = useRef(null);
+
+  const intervalRef = useRef(null);
 
   const {
     isPlaying,
@@ -28,7 +31,7 @@ export const useTimer = () => {
   useEffect(() => {
     popmusicTrackRef.current = new Audio("/music/pop.mp3");
     bellmusicTrackRef.current = new Audio("/music/boxing_bell.mp3");
-    timeUpmusicTrackRef.current = new Audio("/music/time_up.mp3");
+    timeUpMusicTrackRef.current = new Audio("/music/time_up.mp3");
     endmusicTrackRef.current = new Audio("/music/pizzicato.mp3");
   }, []);
 
@@ -39,9 +42,18 @@ export const useTimer = () => {
       isWork &&
       currentInterval === 1 &&
       remainingWorkSeconds === totalWorkSeconds;
-    if (!shouldStartCountdown) return;
 
-    let intervalId;
+    if (!shouldStartCountdown) {
+      // Stop countdown if the timer is paused
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+
+      // Pause music track if the timer is paused while music is playing
+      bellmusicTrackRef.current?.pause();
+      popmusicTrackRef.current?.pause();
+
+      return;
+    }
 
     const tick = () => {
       setTimerState((prev) => {
@@ -54,7 +66,10 @@ export const useTimer = () => {
           }
 
           // Stop the interval
-          clearInterval(intervalId);
+          if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+          }
 
           return {
             ...prev,
@@ -80,7 +95,17 @@ export const useTimer = () => {
     // Avoid using setInterval directly which would otherwise
     // desynchronize the pop sound and countdown display
     tick();
-    intervalId = setInterval(tick, 1000);
+    intervalRef.current = setInterval(tick, 1000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+
+      bellmusicTrackRef.current?.pause();
+      popmusicTrackRef.current?.pause();
+    };
   }, [isPlaying, isWork, currentInterval]);
 
   // Decrease remaining seconds every second during active timer
@@ -109,22 +134,31 @@ export const useTimer = () => {
   // Switch between work and break intervals
   useEffect(() => {
     const isLastBreakFinished = !isWork && currentInterval === intervalCount;
-
-    const isCurrentSessionFinished = isWork
+    const isCurrentIntervalFinished = isWork
       ? remainingWorkSeconds === 0
       : remainingBreakSeconds === 0;
 
-    if (!isCurrentSessionFinished || isLastBreakFinished) return;
+    if (!isPlaying) {
+      timeUpMusicTrackRef.current?.pause();
+      return;
+    }
+
+    if (!isCurrentIntervalFinished || isLastBreakFinished) return;
 
     // Play time-up sound at the end of each interval
-    if (timeUpmusicTrackRef.current) {
-      timeUpmusicTrackRef.current.play().catch((err) => {
+    if (timeUpMusicTrackRef.current) {
+      timeUpMusicTrackRef.current.play().catch((err) => {
         console.error("Failed to play time-up sound:", err);
       });
+
+      // Prevent time-up sound from replaying when the timer is paused and resumed
+      timeUPlaybackCountRef.current = 1;
     }
 
     // Delay interval switch for smoother transition
     const timeout = setTimeout(() => {
+      timeUPlaybackCountRef.current = 0;
+
       setTimerState((prev) => {
         const nextIsWork = !prev.isWork;
         const nextInterval = prev.isWork
@@ -143,10 +177,13 @@ export const useTimer = () => {
             : prev.totalBreakSeconds,
         };
       });
-    }, 1000);
+    }, 2000);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [
+    isPlaying,
     isWork,
     remainingWorkSeconds,
     remainingBreakSeconds,
@@ -159,7 +196,7 @@ export const useTimer = () => {
     const shouldPlayFinishSound =
       !isWork &&
       currentInterval === intervalCount &&
-      remainingBreakSeconds === 0; // check break time here
+      remainingBreakSeconds === 0;
 
     if (!shouldPlayFinishSound) return;
 
@@ -185,7 +222,11 @@ export const useTimer = () => {
       });
     }, 1000);
 
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+
+      endmusicTrackRef.current?.pause();
+    };
   }, [isWork, intervalCount, currentInterval, remainingBreakSeconds]);
 
   const displayedSeconds = isWork

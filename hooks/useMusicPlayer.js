@@ -23,16 +23,15 @@ export const useMusicPlayer = () => {
       const objectUrl = URL.createObjectURL(musicTrack);
       musicTrackRef.current = new Audio(objectUrl);
       musicTrackRef.current.loop = true;
-
-      return () => {
-        if (musicTrackRef.current) {
-          musicTrackRef.current.pause();
-          musicTrackRef.current.currentTime = 0;
-          URL.revokeObjectURL(musicTrackRef.current.src);
-          musicTrackRef.current = null;
-        }
-      };
     }
+
+    return () => {
+      if (musicTrackRef.current) {
+        musicTrackRef.current.pause();
+        URL.revokeObjectURL(musicTrackRef.current.src);
+        musicTrackRef.current = null;
+      }
+    };
   }, [musicTrack]);
 
   // Manage audio playback during the work interval
@@ -41,7 +40,9 @@ export const useMusicPlayer = () => {
 
     let timeout;
 
-    if (isPlaying && isWork) {
+    const shouldPlayMusic = isPlaying && isWork && remainingWorkSeconds > 0;
+
+    if (shouldPlayMusic) {
       const playAudio = () => {
         musicTrackRef.current
           .play()
@@ -65,14 +66,19 @@ export const useMusicPlayer = () => {
       if (remainingWorkSeconds === 2) {
         fadeOutAudio(musicTrackRef);
       }
-
-      return () => clearTimeout(timeout);
     }
-
     // Pause audio if timer is not running
-    if (!isPlaying) {
+    else if (!isPlaying) {
       musicTrackRef.current.pause();
     }
+
+    return () => {
+      clearTimeout(timeout);
+
+      if (musicTrackRef.current && !isPlaying) {
+        musicTrackRef.current.pause();
+      }
+    };
   }, [isPlaying, isWork, totalWorkSeconds, remainingWorkSeconds]);
 
   // Reset audio after final break interval ends
