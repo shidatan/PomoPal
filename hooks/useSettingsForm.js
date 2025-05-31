@@ -25,7 +25,7 @@ const formSchema = z.object({
           file.type === "audio/mpeg" ||
           file.name?.toLowerCase().endsWith(".mp3"),
         {
-          message: "Only .mp3 files are allowed",
+          message: "Only MP3 files are allowed",
         },
       ),
     z.undefined(),

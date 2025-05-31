@@ -7,11 +7,9 @@ import { useContext } from "react";
 
 export const Timer = () => {
   const { timerState } = useContext(TimerStateContext);
-
   const { countdown, minutes, seconds } = useTimer();
 
   const { isPlaying, isWork, intervalCount, currentInterval } = timerState;
-
   const showCountdown = isPlaying && countdown >= 1;
 
   return (

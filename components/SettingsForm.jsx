@@ -15,9 +15,7 @@ import { NumberInput } from "./NumberInput";
 
 export const SettingsForm = ({ setOpen }) => {
   const { form, onSubmit, showFileName } = useContext(SettingsFormContext);
-
   const musicTrackInputRef = useRef(null);
-
   const { resetForm } = useResetSettingsForm(musicTrackInputRef);
 
   return (
@@ -54,7 +52,7 @@ export const SettingsForm = ({ setOpen }) => {
               name="musicTrack"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel className="font-normal">Music Track</FormLabel>
+                  <FormLabel className="font-normal">Music Track (MP3)</FormLabel>
                   <FormControl>
                     <Input
                       type="file"

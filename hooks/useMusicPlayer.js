@@ -1,5 +1,5 @@
 import { MusicTrackRefContext } from "@/context/MusicTrackRefContext";
-import { fadeOutAudio } from "@/lib/utils";
+import { fadeInAudio, fadeOutAudio } from "@/lib/utils";
 import { useContext, useEffect } from "react";
 import { TimerStateContext } from "../context/TimerStateContext";
 
@@ -49,22 +49,21 @@ export const useMusicPlayer = () => {
           .catch((err) => console.error("Audio playback failed:", err));
       };
 
-      // Delay playback to prevent overlapping with the starting bell
-      if (remainingWorkSeconds === totalWorkSeconds) {
-        timeout = setTimeout(playAudio, 4500);
-      }
-      // Delay playback to prevent overlap with time-up sound
-      else if (remainingWorkSeconds === totalWorkSeconds - 1) {
-        timeout = setTimeout(playAudio, 500);
-      }
-      // Play immediately for all other moments
-      else {
-        playAudio();
-      }
-
       // Begin fading out audio near the end of the work session
       if (remainingWorkSeconds === 2) {
         fadeOutAudio(musicTrackRef);
+      }
+      // Delay playback to prevent overlapping with the starting bell
+      else if (remainingWorkSeconds === totalWorkSeconds) {
+        timeout = setTimeout(() => fadeInAudio(musicTrackRef), 4000);
+      }
+      // Delay playback to prevent overlap with time-up sound
+      else if (remainingWorkSeconds === totalWorkSeconds - 1) {
+        timeout = setTimeout(() => fadeInAudio(musicTrackRef), 500);
+      }
+      // Play immediately for all other moments
+      else {
+        fadeInAudio(musicTrackRef);
       }
     }
     // Pause audio if timer is not running

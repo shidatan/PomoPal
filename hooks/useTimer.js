@@ -11,7 +11,6 @@ export const useTimer = () => {
   const timeUpMusicTrackRef = useRef(null);
   const timeUPlaybackCountRef = useRef(0);
   const endmusicTrackRef = useRef(null);
-
   const intervalRef = useRef(null);
 
   const {
@@ -179,9 +178,7 @@ export const useTimer = () => {
       });
     }, 2000);
 
-    return () => {
-      clearTimeout(timeout);
-    };
+    return () => clearTimeout(timeout);
   }, [
     isPlaying,
     isWork,
@@ -224,7 +221,6 @@ export const useTimer = () => {
 
     return () => {
       clearTimeout(timeout);
-
       endmusicTrackRef.current?.pause();
     };
   }, [isWork, intervalCount, currentInterval, remainingBreakSeconds]);
