@@ -6,7 +6,7 @@ import "./globals.css";
 import { MusicTrackRefContextProvider } from "@/context/MusicTrackRefContext";
 
 export const metadata = {
-  title: "Pomodoro Timer",
+  title: "PomoPal",
   description: "Your Pomodoro, Your Tune.",
 };
 

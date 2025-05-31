@@ -1,16 +1,19 @@
 "use client";
 
 import { useTimer } from "@/hooks/useTimer";
-import { TimerStateContext } from "@/context/TimerStateContext";
 import clsx from "clsx";
-import { useContext } from "react";
 
 export const Timer = () => {
-  const { timerState } = useContext(TimerStateContext);
-  const { countdown, minutes, seconds } = useTimer();
-
-  const { isPlaying, isWork, intervalCount, currentInterval } = timerState;
-  const showCountdown = isPlaying && countdown >= 1;
+  const {
+    isPlaying,
+    isWork,
+    intervalCount,
+    currentInterval,
+    countdown,
+    minutes,
+    seconds,
+    showCountdown,
+  } = useTimer();
 
   return (
     <div

@@ -26,6 +26,8 @@ export const useTimer = () => {
     musicTrack,
   } = timerState;
 
+  const showCountdown = isPlaying && countdown >= 1;
+
   // Load audio files on component mount
   useEffect(() => {
     popmusicTrackRef.current = new Audio("/music/pop.mp3");
@@ -235,10 +237,13 @@ export const useTimer = () => {
   const seconds = (displayedSeconds % 60).toString().padStart(2, "0");
 
   return {
-    timerState,
-    setTimerState,
+    isPlaying,
+    isWork,
+    intervalCount,
+    currentInterval,
     countdown,
     minutes,
     seconds,
+    showCountdown,
   };
 };

@@ -14,8 +14,18 @@ export const useMusicPlayer = () => {
     currentInterval,
     totalWorkSeconds,
     remainingWorkSeconds,
+    totalBreakSeconds,
+    remainingBreakSeconds,
     musicTrack,
   } = timerState;
+
+  const remaining = isWork ? remainingWorkSeconds : remainingBreakSeconds;
+  const total = isWork ? totalWorkSeconds : totalBreakSeconds;
+  const progressBarWidth = Math.max(0, ((remaining / total) * 100).toFixed(2));
+  const musicTrackNameWithoutExtension = musicTrack?.name?.replace(
+    /\.mp3$/,
+    "",
+  );
 
   // Initialize audio object when the music track changes
   useEffect(() => {
@@ -98,4 +108,9 @@ export const useMusicPlayer = () => {
     remainingWorkSeconds,
     musicTrackRef,
   ]);
+
+  return {
+    progressBarWidth,
+    musicTrackNameWithoutExtension,
+  };
 };

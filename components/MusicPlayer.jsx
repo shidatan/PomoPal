@@ -12,8 +12,7 @@ import { useContext } from "react";
 export const MusicPlayer = () => {
   const { musicTrackRef } = useContext(MusicTrackRefContext);
   const { timerState, setTimerState } = useContext(TimerStateContext);
-
-  useMusicPlayer();
+  const { progressBarWidth, musicTrackNameWithoutExtension } = useMusicPlayer();
 
   const {
     isPlaying,
@@ -21,20 +20,15 @@ export const MusicPlayer = () => {
     intervalCount,
     totalWorkSeconds,
     totalBreakSeconds,
-    remainingWorkSeconds,
-    remainingBreakSeconds,
     musicTrack,
   } = timerState;
-
-  const remaining = isWork ? remainingWorkSeconds : remainingBreakSeconds;
-  const total = isWork ? totalWorkSeconds : totalBreakSeconds;
 
   return (
     <div className="rounded-container">
       <p
-        className={`mb-8 ${!musicTrack?.name ? "text-muted-foreground italic" : ""}`}
+        className={`mb-8 ${!musicTrackNameWithoutExtension ? "text-muted-foreground italic" : ""}`}
       >
-        {musicTrack?.name || "No music track selected."}
+        {musicTrackNameWithoutExtension || "No music track selected."}
       </p>
 
       <div className="bg-secondary relative mb-12 h-4 rounded-full">
@@ -47,7 +41,7 @@ export const MusicPlayer = () => {
             },
           )}
           style={{
-            width: `${Math.max(0, ((remaining / total) * 100).toFixed(2))}%`,
+            width: `${progressBarWidth}%`,
           }}
         ></div>
       </div>
