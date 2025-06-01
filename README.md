@@ -1,6 +1,6 @@
 ## PomoPal
 
-PomoPal is a productivity tool that enhances your Pomodoro sessions by letting you upload your own music. With a modern interface and the freedom to choose your soundtrack, PomoPal helps you stay focused and motivated with Your Pomodoro. Your Tune.
+PomoPal is a productivity tool that enhances your Pomodoro sessions by letting you upload your own music. With a modern interface and the freedom to choose your soundtrack, PomoPal helps you stay focused and motivated with <i>Your Pomodoro. Your Tune.</i>
 
 ## Notable Technologies and Tools
 
