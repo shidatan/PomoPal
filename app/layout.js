@@ -1,9 +1,11 @@
+import background from "@/app/background.png";
 import { SettingsSheet } from "@/components/SettingsSheet";
 import { Toaster } from "@/components/ui/sonner";
+import { MusicTrackRefContextProvider } from "@/context/MusicTrackRefContext";
 import { SettingsFormContextProvider } from "@/context/SettingsFormContext";
 import { TimerStateContextProvider } from "@/context/TimerStateContext";
+import Image from "next/image";
 import "./globals.css";
-import { MusicTrackRefContextProvider } from "@/context/MusicTrackRefContext";
 
 export const metadata = {
   title: "PomoPal",
@@ -14,26 +16,33 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="text-primary-foreground antialiased">
+        <Image
+          src={background}
+          fill={true}
+          alt="Background Image"
+          className="fixed inset-0 -z-10"
+        />
+
         <TimerStateContextProvider>
           <MusicTrackRefContextProvider>
             <SettingsFormContextProvider>
-              <div className="mx-auto flex h-screen w-[90%] max-w-7xl flex-col justify-between pt-16 pb-8">
-                <div className="flex items-center justify-between">
-                  <p>PomoPal</p>
+              <div className="mx-auto flex h-screen w-[90%] max-w-[1536px] flex-col justify-center gap-2">
+                <div className="inline">
                   <SettingsSheet />
                 </div>
 
-                {children}
+                <div className="flex items-end gap-6">
+                  <div className="w-1/2">
+                    <p className="tertiaryFontScale">PomoPal</p>
+                    <p className="text-muted-foreground negativeFontScale max-w-[352px] text-balance xl:max-w-md 2xl:max-w-xl">
+                      The Pomodoro Technique is a time management method that
+                      uses focused work sessions with short breaks to enhance
+                      focus and productivity.
+                    </p>
+                  </div>
 
-                <p
-                  className="mx-auto text-xs"
-                  style={{
-                    fontFamily: "Helvetica Now Display",
-                    fontWeight: 300,
-                  }}
-                >
-                  Your Pomodoro, Your Tune.
-                </p>
+                  <div className="w-1/2">{children}</div>
+                </div>
               </div>
             </SettingsFormContextProvider>
           </MusicTrackRefContextProvider>

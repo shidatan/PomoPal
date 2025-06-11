@@ -17,13 +17,16 @@ export const Timer = () => {
 
   return (
     <div
-      className={clsx("rounded-container", {
-        "border-none !bg-[#FF2826] text-black": isPlaying && isWork,
-        "border-none !bg-[#0DB556] text-black": isPlaying && !isWork,
-        "bg-black": !isPlaying,
-      })}
+      className={clsx(
+        "rounded-container flex aspect-video w-full flex-col justify-center rounded-[64px] p-10 2xl:p-12",
+        {
+          "border-none !bg-[#FF2826] text-black": isPlaying && isWork,
+          "border-none !bg-[#0DB556] text-black": isPlaying && !isWork,
+          "bg-black": !isPlaying,
+        },
+      )}
     >
-      <div className="flex justify-between">
+      <div className="baseFontScale flex justify-between font-light tracking-widest">
         <p className="uppercase">{isWork ? "work" : "break"} interval</p>
         <p>
           {currentInterval}/{intervalCount}
@@ -31,7 +34,7 @@ export const Timer = () => {
       </div>
 
       <p
-        className="text-center text-[160px]"
+        className="text-center timerFontScale"
         style={{ fontFamily: "Shtozer", fontWeight: 600 }}
       >
         {showCountdown ? countdown : `${minutes}:${seconds}`}

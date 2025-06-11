@@ -108,6 +108,13 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Utopia FYI */
+  --step--1: clamp(0.625rem, 0.1964rem + 0.6696vw, 1rem);
+  --step-0: clamp(0.75rem, 0.1786rem + 0.8929vw, 1.25rem);
+  --step-1: clamp(0.875rem, 0.3036rem + 0.8929vw, 1.375rem);
+  --step-2: clamp(2.3063rem, 0.7277rem + 2.4665vw, 3.6875rem);
+  --step-3: clamp(6rem, -0.8571rem + 10.7143vw, 12rem);
 }
 
 .dark {
@@ -153,10 +160,33 @@
   }
 }
 
+/* Font */
+.negativeFontScale {
+  font-size: var(--step--1);
+} 
+
+.baseFontScale {
+  font-size: var(--step-0);
+}
+
+.secondaryFontScale {
+  font-size: var(--step-1);
+} 
+
+.tertiaryFontScale {
+  font-size: var(--step-2);
+}
+
+.timerFontScale {
+  font-size: var(--step-3);
+}
+
+
+/* General */
 .rounded-container {
-  @apply border-secondary flex w-1/2 flex-col justify-center rounded-[64px] border-2 bg-black px-10 text-center;
+  @apply border-secondary border-2 bg-black text-center;
 }
 
 .focus {
-  @apply focus-visible:border-none focus-visible:ring-2 focus-visible:outline-none
+  @apply focus-visible:border-none focus-visible:ring-2 focus-visible:outline-none;
 }

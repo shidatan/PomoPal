@@ -24,29 +24,32 @@ export const MusicPlayer = () => {
   } = timerState;
 
   return (
-    <div className="rounded-container">
-      <p
-        className={`mb-8 ${!musicTrackNameWithoutExtension ? "text-muted-foreground italic" : ""}`}
-      >
-        {musicTrackNameWithoutExtension || "No music track selected."}
-      </p>
+    <div className="flex w-full gap-4">
+      <div className="rounded-container flex-1 space-y-2 rounded-full px-10 py-4 xl:py-5 2xl:space-y-3 2xl:px-12 2xl:py-6">
+        <p
+          className={`baseFontScale text-left ${!musicTrackNameWithoutExtension ? "text-muted-foreground" : ""}`}
+        >
+          {musicTrackNameWithoutExtension || "No music track selected."}
+        </p>
 
-      <div className="bg-secondary relative mb-12 h-4 rounded-full">
-        <div
-          className={clsx(
-            "absolute top-0 left-0 h-full rounded-full transition-all duration-300 ease-in-out",
-            {
-              "bg-[linear-gradient(90deg,_#1E1E1E_0%,_#0DB556_100%)]": !isWork,
-              "bg-[linear-gradient(90deg,_#1E1E1E_0%,_#FF2826_100%)]": isWork,
-            },
-          )}
-          style={{
-            width: `${progressBarWidth}%`,
-          }}
-        ></div>
+        <div className="bg-secondary relative h-3 rounded-full">
+          <div
+            className={clsx(
+              "absolute top-0 left-0 h-full rounded-full transition-all duration-300 ease-in-out",
+              {
+                "bg-[linear-gradient(90deg,_#1E1E1E_0%,_#0DB556_100%)]":
+                  !isWork,
+                "bg-[linear-gradient(90deg,_#1E1E1E_0%,_#FF2826_100%)]": isWork,
+              },
+            )}
+            style={{
+              width: `${progressBarWidth}%`,
+            }}
+          ></div>
+        </div>
       </div>
 
-      <div className="flex items-center justify-center gap-9">
+      <div className="rounded-container flex w-1/4 max-w-[182px] items-center justify-center gap-4 rounded-full">
         <Button
           variant="secondary"
           className="h-auto w-auto cursor-pointer rounded-full !p-2"
@@ -55,15 +58,15 @@ export const MusicPlayer = () => {
           }
         >
           {isPlaying ? (
-            <Pause className="size-10 fill-white stroke-1" />
+            <Pause className="size-5 fill-white xl:size-7 2xl:size-8" />
           ) : (
-            <Play className="size-10 fill-white" />
+            <Play className="size-5 fill-white xl:size-7 2xl:size-8" />
           )}
         </Button>
 
         <Button
           variant="secondary"
-          className="h-14 w-14 cursor-pointer rounded-full"
+          className="h-9 w-9 cursor-pointer rounded-full xl:h-11 xl:w-11 2xl:h-12 2xl:w-12"
           onClick={() => {
             setTimerState({
               ...INITIAL_TIMER_STATE,
@@ -81,7 +84,7 @@ export const MusicPlayer = () => {
             }
           }}
         >
-          <RotateCcw className="size-8 stroke-1 text-white" />
+          <RotateCcw className="size-3 text-white xl:size-5 2xl:size-6" />
         </Button>
       </div>
     </div>
