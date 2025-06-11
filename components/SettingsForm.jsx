@@ -72,7 +72,7 @@ export const SettingsForm = ({ setOpen }) => {
             />
 
             {showFileName && form.getValues("musicTrack") && (
-              <div className="text-muted-foreground text-sm">
+              <div className="text-muted-foreground text-sm negativeFontScale">
                 <span>Selected: </span>
                 <span className="italic">
                   {form.getValues("musicTrack").name}
