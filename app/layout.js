@@ -6,6 +6,7 @@ import { SettingsFormContextProvider } from "@/context/SettingsFormContext";
 import { TimerStateContextProvider } from "@/context/TimerStateContext";
 import Image from "next/image";
 import "./globals.css";
+import { Hero } from "@/components/Hero";
 
 export const metadata = {
   title: "PomoPal",
@@ -33,12 +34,7 @@ export default function RootLayout({ children }) {
 
                 <div className="flex items-end gap-6">
                   <div className="w-1/2">
-                    <p className="tertiaryFontScale">PomoPal</p>
-                    <p className="text-muted-foreground negativeFontScale max-w-[352px] text-balance xl:max-w-md 2xl:max-w-xl">
-                      The Pomodoro Technique is a time management method that
-                      uses focused work sessions with short breaks to enhance
-                      focus and productivity.
-                    </p>
+                    <Hero />
                   </div>
 
                   <div className="w-1/2">{children}</div>

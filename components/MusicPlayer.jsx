@@ -32,7 +32,7 @@ export const MusicPlayer = () => {
           {musicTrackNameWithoutExtension || "No music track selected."}
         </p>
 
-        <div className="bg-secondary relative h-3 rounded-full">
+        <div className="bg-secondary relative h-3 rounded-full overflow-hidden">
           <div
             className={clsx(
               "absolute top-0 left-0 h-full rounded-full transition-all duration-300 ease-in-out",
