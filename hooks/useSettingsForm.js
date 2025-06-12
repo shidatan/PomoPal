@@ -39,7 +39,7 @@ export const useSettingsForm = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      intervalCount: "6",
+      intervalCount: "4",
       totalWorkMinutes: "25",
       totalBreakMinutes: "5",
       musicTrack: undefined,

@@ -29,7 +29,7 @@ export const SettingsForm = ({ setOpen }) => {
             form={form}
             name="intervalCount"
             label="Interval count"
-            placeholder="6"
+            placeholder="4"
           />
 
           <NumberInput
