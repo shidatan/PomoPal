@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
         <TimerStateContextProvider>
           <MusicTrackRefContextProvider>
             <SettingsFormContextProvider>
-              <div className="mx-auto flex h-screen w-[90%] max-w-[1536px] flex-col justify-center gap-2">
+              <div className="mx-auto flex h-screen w-[90%] max-w-[112rem] flex-col justify-center gap-2">
                 <div className="inline">
                   <SettingsSheet />
                 </div>

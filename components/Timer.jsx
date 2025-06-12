@@ -18,7 +18,7 @@ export const Timer = () => {
   return (
     <div
       className={clsx(
-        "rounded-container flex aspect-video w-full flex-col justify-center rounded-[64px] p-10 3xl:p-12",
+        "rounded-container 3xl:aspect-[3/2] 3xl:p-12 flex aspect-video w-full flex-col justify-center rounded-[64px] p-10",
         {
           "border-none !bg-[#FF2826] text-black": isPlaying && isWork,
           "border-none !bg-[#0DB556] text-black": isPlaying && !isWork,
@@ -34,7 +34,7 @@ export const Timer = () => {
       </div>
 
       <p
-        className="text-center timerFontScale"
+        className="timerFontScale text-center"
         style={{ fontFamily: "Shtozer", fontWeight: 600 }}
       >
         {showCountdown ? countdown : `${minutes}:${seconds}`}
