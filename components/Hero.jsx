@@ -7,17 +7,17 @@ const text = [
   {
     id: 1,
     content: [
-      "The Pomodoro Technique is a time management method that uses focused work sessions with short breaks to enhance focus and productivity.",
-    ],
-  },
-  {
-    id: 2,
-    content: [
       "PomoPal boosts your productivity with custom Pomodoro sessions.",
       <>
         Upload your music, stay focused, and stay motivated —{" "}
         <i>Your Pomodoro. Your Tune.</i>
       </>,
+    ],
+  },
+  {
+    id: 2,
+    content: [
+      "The Pomodoro Technique is a time management method that uses focused work sessions with short breaks to enhance focus and productivity.",
     ],
   },
 ];
