@@ -18,7 +18,7 @@ export const Timer = () => {
   return (
     <div
       className={clsx(
-        "rounded-container flex aspect-video w-full flex-col justify-center rounded-[64px] p-10 2xl:p-12",
+        "rounded-container flex aspect-video w-full flex-col justify-center rounded-[64px] p-10 3xl:p-12",
         {
           "border-none !bg-[#FF2826] text-black": isPlaying && isWork,
           "border-none !bg-[#0DB556] text-black": isPlaying && !isWork,

@@ -38,7 +38,7 @@ export const Hero = () => {
 
   return (
     <div className="relative">
-      <p className="tertiaryFontScale -translate-y-1/2">PomoPal</p>
+      <p className="tertiaryFontScale -translate-y-1/2 3xl:text-red-500">PomoPal</p>
       <div className="text-muted-foreground negativeFontScale max-w-[352px] text-balance xl:max-w-md 2xl:max-w-xl">
         <AnimatePresence>
           <motion.p

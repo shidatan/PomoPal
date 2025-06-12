@@ -25,7 +25,7 @@ export const MusicPlayer = () => {
 
   return (
     <div className="flex w-full gap-4">
-      <div className="rounded-container flex-1 space-y-2 rounded-full px-10 py-4 xl:py-5 2xl:space-y-3 2xl:px-12 2xl:py-6">
+      <div className="rounded-container flex-1 space-y-2 rounded-full px-10 py-4 xl:py-5 3xl:space-y-3 3xl:px-12 3xl:py-6">
         <p
           className={`baseFontScale text-left ${!musicTrackNameWithoutExtension ? "text-muted-foreground" : ""}`}
         >
@@ -58,15 +58,15 @@ export const MusicPlayer = () => {
           }
         >
           {isPlaying ? (
-            <Pause className="size-5 fill-white xl:size-7 2xl:size-8" />
+            <Pause className="size-5 fill-white xl:size-7 3xl:size-8" />
           ) : (
-            <Play className="size-5 fill-white xl:size-7 2xl:size-8" />
+            <Play className="size-5 fill-white xl:size-7 3xl:size-8" />
           )}
         </Button>
 
         <Button
           variant="secondary"
-          className="h-9 w-9 cursor-pointer rounded-full xl:h-11 xl:w-11 2xl:h-12 2xl:w-12"
+          className="h-9 w-9 cursor-pointer rounded-full xl:h-11 xl:w-11 3xl:h-12 3xl:w-12"
           onClick={() => {
             setTimerState({
               ...INITIAL_TIMER_STATE,
@@ -84,7 +84,7 @@ export const MusicPlayer = () => {
             }
           }}
         >
-          <RotateCcw className="size-3 text-white xl:size-5 2xl:size-6" />
+          <RotateCcw className="size-3 text-white xl:size-5 3xl:size-6" />
         </Button>
       </div>
     </div>

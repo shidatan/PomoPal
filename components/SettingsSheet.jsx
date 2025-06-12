@@ -22,7 +22,7 @@ export const SettingsSheet = () => {
       <SheetTrigger
         onClick={() => setTimerState((prev) => ({ ...prev, isPlaying: false }))}
       >
-        <Settings className="size-6 cursor-pointer text-white 2xl:size-7" />
+        <Settings className="size-6 cursor-pointer text-white 3xl:size-7" />
       </SheetTrigger>
       <SheetContent className="p-6 2xl:!max-w-md">
         <SheetHeader className="max-w-none space-y-6 p-0">
