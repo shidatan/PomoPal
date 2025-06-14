@@ -22,9 +22,9 @@ export const SettingsForm = ({ setOpen }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((values) => onSubmit(values, setOpen))}
-        className="space-y-14"
+        className="space-y-9 xl:space-y-12"
       >
-        <div className="space-y-6">
+        <div className="3xl:space-y-8 4xl:space-y-10 space-y-4 xl:space-y-6">
           <NumberInput
             form={form}
             name="intervalCount"
@@ -46,20 +46,20 @@ export const SettingsForm = ({ setOpen }) => {
             placeholder="5"
           />
 
-          <div className="space-y-2">
+          <div className="space-y-1">
             <FormField
               control={form.control}
               name="musicTrack"
               render={({ field }) => (
-                <FormItem className="space-y-2">
-                  <FormLabel className="baseFontScale font-normal">
+                <FormItem className="space-y-1">
+                  <FormLabel className="font-400 font-normal">
                     Music Track (MP3)
                   </FormLabel>
                   <FormControl>
                     <Input
                       type="file"
                       accept=".mp3,audio/mpeg"
-                      className="border-border focus file:negativeFontScale negativeFontScale text-white file:text-white"
+                      className="border-border focus font-300 3xl:leading-[1.5] leading-[2.75] text-white file:hidden file:text-white xl:leading-[2.25] 2xl:leading-[1.8]"
                       ref={musicTrackInputRef}
                       onChange={(e) =>
                         form.setValue("musicTrack", e.target.files?.[0])
@@ -72,7 +72,7 @@ export const SettingsForm = ({ setOpen }) => {
             />
 
             {showFileName && form.getValues("musicTrack") && (
-              <div className="text-muted-foreground text-sm negativeFontScale">
+              <div className="text-muted-foreground font-300 text-sm">
                 <span>Selected: </span>
                 <span className="italic">
                   {form.getValues("musicTrack").name}
@@ -86,14 +86,14 @@ export const SettingsForm = ({ setOpen }) => {
           <Button
             variant="outline"
             type="submit"
-            className="focus baseFontScale cursor-pointer font-normal"
+            className="focus font-400 cursor-pointer font-normal"
           >
             Save
           </Button>
           <Button
             type="button"
             variant="outline"
-            className="focus baseFontScale cursor-pointer font-normal"
+            className="focus font-400 cursor-pointer font-normal"
             onClick={() => resetForm(setOpen)}
           >
             Reset

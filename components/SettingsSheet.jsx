@@ -22,15 +22,15 @@ export const SettingsSheet = () => {
       <SheetTrigger
         onClick={() => setTimerState((prev) => ({ ...prev, isPlaying: false }))}
       >
-        <Settings className="size-6 cursor-pointer text-white 3xl:size-7" />
+        <Settings className="4xl:size-10 3xl:size-7 size-5 cursor-pointer text-white xl:size-6" />
       </SheetTrigger>
-      <SheetContent className="p-6 2xl:!max-w-md">
-        <SheetHeader className="max-w-none space-y-6 p-0">
+      <SheetContent className="3xl:!max-w-md 4xl:!max-w-lg 4xl:p-10 !w-[30%] p-7">
+        <SheetHeader className="3xl:space-y-8 4xl:space-y-10 max-w-none space-y-4 p-0 xl:space-y-6">
           <div>
-            <SheetTitle className="secondaryFontScale font-normal text-white">
+            <SheetTitle className="font-400 font-normal text-white">
               Pomodoro Settings
             </SheetTitle>
-            <SheetDescription className="baseFontScale">
+            <SheetDescription className="font-300">
               Customize your Pomodoro preferences
             </SheetDescription>
           </div>

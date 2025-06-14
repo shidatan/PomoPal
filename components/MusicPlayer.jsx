@@ -25,31 +25,34 @@ export const MusicPlayer = () => {
 
   return (
     <div className="flex w-full gap-4">
-      <div className="rounded-container flex-1 space-y-2 rounded-full px-10 py-4 xl:py-5 3xl:space-y-3 3xl:px-12 3xl:py-6">
-        <p
-          className={`baseFontScale text-left ${!musicTrackNameWithoutExtension ? "text-muted-foreground" : ""}`}
-        >
-          {musicTrackNameWithoutExtension || "No music track selected."}
-        </p>
+      <div className="rounded-container 3xl:py-7 4xl:py-8 flex-1 rounded-full py-3 xl:py-4 2xl:py-6">
+        <div className="mx-auto w-[85%] space-y-2 2xl:space-y-3">
+          <p
+            className={`font-400 text-left ${!musicTrackNameWithoutExtension ? "text-muted-foreground" : ""}`}
+          >
+            {musicTrackNameWithoutExtension || "No music track selected."}
+          </p>
 
-        <div className="bg-secondary relative h-3 rounded-full overflow-hidden">
-          <div
-            className={clsx(
-              "absolute top-0 left-0 h-full rounded-full transition-all duration-300 ease-in-out",
-              {
-                "bg-[linear-gradient(90deg,_#1E1E1E_0%,_#0DB556_100%)]":
-                  !isWork,
-                "bg-[linear-gradient(90deg,_#1E1E1E_0%,_#FF2826_100%)]": isWork,
-              },
-            )}
-            style={{
-              width: `${progressBarWidth}%`,
-            }}
-          ></div>
+          <div className="bg-secondary 3xl:h-3.5 4xl:h-5 relative h-2 overflow-hidden rounded-full 2xl:h-3">
+            <div
+              className={clsx(
+                "absolute top-0 left-0 h-full rounded-full transition-all duration-300 ease-in-out",
+                {
+                  "bg-[linear-gradient(90deg,_#1E1E1E_0%,_#0DB556_100%)]":
+                    !isWork,
+                  "bg-[linear-gradient(90deg,_#1E1E1E_0%,_#FF2826_100%)]":
+                    isWork,
+                },
+              )}
+              style={{
+                width: `${progressBarWidth}%`,
+              }}
+            ></div>
+          </div>
         </div>
       </div>
 
-      <div className="rounded-container flex w-1/4 max-w-[182px] items-center justify-center gap-4 rounded-full">
+      <div className="4xl:max-w-[14rem] 4xl:gap-6 rounded-container 3xl:max-w-[12rem] 3xl:gap-5 flex w-1/4 max-w-[6.5rem] items-center justify-center gap-3 rounded-full xl:max-w-[8rem] 2xl:max-w-[10.5rem] 2xl:gap-4">
         <Button
           variant="secondary"
           className="h-auto w-auto cursor-pointer rounded-full !p-2"
@@ -58,15 +61,15 @@ export const MusicPlayer = () => {
           }
         >
           {isPlaying ? (
-            <Pause className="size-5 fill-white xl:size-7 3xl:size-8" />
+            <Pause className="3xl:size-10 4xl:size-12 size-4 fill-white xl:size-6 2xl:size-8" />
           ) : (
-            <Play className="size-5 fill-white xl:size-7 3xl:size-8" />
+            <Play className="3xl:size-10 4xl:size-12 size-4 fill-white xl:size-6 2xl:size-8" />
           )}
         </Button>
 
         <Button
           variant="secondary"
-          className="h-9 w-9 cursor-pointer rounded-full xl:h-11 xl:w-11 3xl:h-12 3xl:w-12"
+          className="4xl:size-16 3xl:size-14 size-8 cursor-pointer rounded-full xl:size-10 2xl:size-12"
           onClick={() => {
             setTimerState({
               ...INITIAL_TIMER_STATE,
@@ -84,7 +87,7 @@ export const MusicPlayer = () => {
             }
           }}
         >
-          <RotateCcw className="size-3 text-white xl:size-5 3xl:size-6" />
+          <RotateCcw className="4xl:size-10 3xl:size-8 size-3 stroke-1 text-white xl:size-4 2xl:size-6" />
         </Button>
       </div>
     </div>

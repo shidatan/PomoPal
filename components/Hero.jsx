@@ -7,7 +7,7 @@ const text = [
   {
     id: 1,
     content: [
-      "PomoPal boosts your productivity with custom Pomodoro sessions.",
+      "Boosts your productivity with custom Pomodoro sessions.",
       <>
         Upload your music, stay focused, and stay motivated —{" "}
         <i>Your Pomodoro. Your Tune.</i>
@@ -17,7 +17,8 @@ const text = [
   {
     id: 2,
     content: [
-      "The Pomodoro Technique is a time management method that uses focused work sessions with short breaks to enhance focus and productivity.",
+      "The Pomodoro Technique is a time management method that uses focused ",
+      "work sessions with short breaks to enhance focus and productivity.",
     ],
   },
 ];
@@ -38,26 +39,24 @@ export const Hero = () => {
 
   return (
     <div className="relative">
-      <p className="tertiaryFontScale -translate-y-1/2">PomoPal</p>
-      <div className="text-muted-foreground negativeFontScale max-w-[352px] text-balance xl:max-w-md 2xl:max-w-xl">
-        <AnimatePresence>
-          <motion.p
-            key={text[index].id}
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -20, opacity: 0 }}
-            transition={{ ease: "easeInOut" }}
-            className="absolute -translate-y-full whitespace-pre-line"
-          >
-            {text[index].content.map((line, i) => (
-              <span key={i}>
-                {line}
-                {i < text[index].content.length - 1 && <br />}
-              </span>
-            ))}
-          </motion.p>
-        </AnimatePresence>
-      </div>
+      <p className="font-700 4xl:-translate-y-1/3 -translate-y-2/5">PomoPal</p>
+      <AnimatePresence>
+        <motion.p
+          key={text[index].id}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -20, opacity: 0 }}
+          transition={{ ease: "easeInOut" }}
+          className="text-muted-foreground font-300 absolute w-full -translate-y-full text-balance whitespace-pre-line"
+        >
+          {text[index].content.map((line, i) => (
+            <span key={i}>
+              {line}
+              {i < text[index].content.length - 1 && <br />}
+            </span>
+          ))}
+        </motion.p>
+      </AnimatePresence>
     </div>
   );
 };

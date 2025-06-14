@@ -13,11 +13,11 @@ export const NumberInput = ({ form, name, label, placeholder }) => {
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="space-y-2">
-          <FormLabel className="baseFontScale font-normal">{label}</FormLabel>
+        <FormItem className="space-y-1">
+          <FormLabel className="font-400 font-normal">{label}</FormLabel>
           <FormControl>
             <Input
-              className="border-border focus baseFontScale selection:bg-blue-500"
+              className="border-border focus font-400 selection:bg-blue-500"
               placeholder={placeholder}
               {...field}
             />

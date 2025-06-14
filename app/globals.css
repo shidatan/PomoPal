@@ -74,7 +74,8 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  --breakpoint-3xl: 112rem;
+  --breakpoint-3xl: 120rem;
+  --breakpoint-4xl: 160rem;
 }
 
 :root {
@@ -111,12 +112,10 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  /* Utopia FYI */
-  --step--1: clamp(0.625rem, 0.1964rem + 0.6696vw, 1rem);
-  --step-0: clamp(0.75rem, 0.1786rem + 0.8929vw, 1.25rem);
-  --step-1: clamp(0.875rem, 0.3036rem + 0.8929vw, 1.375rem);
-  --step-2: clamp(2.3063rem, 0.7277rem + 2.4665vw, 3.6875rem);
-  --step-3: clamp(6rem, -0.8571rem + 10.7143vw, 12rem);
+  --font-300: 0.94vw;
+  --font-400: 1.04vw;
+  --font-700: 4.17vw;
+  --font-800: 10vw;
 }
 
 .dark {
@@ -163,26 +162,21 @@
 }
 
 /* Font */
-.negativeFontScale {
-  font-size: var(--step--1);
-} 
-
-.baseFontScale {
-  font-size: var(--step-0);
+.font-300 {
+  font-size: min(var(--font-300), 1.2rem);
 }
 
-.secondaryFontScale {
-  font-size: var(--step-1);
-} 
-
-.tertiaryFontScale {
-  font-size: var(--step-2);
+.font-400 {
+  font-size: min(var(--font-400), 1.5rem)
 }
 
-.timerFontScale {
-  font-size: var(--step-3);
+.font-700 {
+  font-size: min(var(--font-700), 8rem);
 }
 
+.font-800 {
+  font-size: min(var(--font-800), 16rem);
+}
 
 /* General */
 .rounded-container {
