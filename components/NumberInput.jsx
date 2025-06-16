@@ -17,7 +17,7 @@ export const NumberInput = ({ form, name, label, placeholder }) => {
           <FormLabel className="font-400 font-normal">{label}</FormLabel>
           <FormControl>
             <Input
-              className="border-border focus font-400 selection:bg-blue-500"
+              className="border-border focus font-400 bg-black selection:bg-blue-500"
               placeholder={placeholder}
               {...field}
             />

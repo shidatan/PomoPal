@@ -27,7 +27,7 @@ export const Timer = () => {
       )}
     >
       <div className="mx-auto w-[85%]">
-        <div className="font-400 flex justify-between font-light tracking-widest">
+        <div className="font-400 flex justify-between tracking-widest">
           <p className="uppercase">{isWork ? "work" : "break"} interval</p>
           <p>
             {currentInterval}/{intervalCount}

@@ -8,7 +8,7 @@ import { INITIAL_TIMER_STATE } from "@/lib/constants";
 const positiveIntegerString = z
   .string()
   .nonempty("Required")
-  .regex(/^\d+$/, { message: "Must be a whole number" })
+  .regex(/^\d+$/, { message: "Must be a whole number and not negative" })
   .refine((val) => parseInt(val, 10) >= 1, {
     message: "Must be at least 1",
   });

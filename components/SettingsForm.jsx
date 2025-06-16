@@ -59,7 +59,7 @@ export const SettingsForm = ({ setOpen }) => {
                     <Input
                       type="file"
                       accept=".mp3,audio/mpeg"
-                      className="border-border focus font-300 3xl:leading-[1.5] leading-[2.75] text-white file:hidden file:text-white xl:leading-[2.25] 2xl:leading-[1.8]"
+                      className="border-border focus font-300 3xl:leading-[1.5] bg-black leading-[2.75] text-white file:hidden file:text-white xl:leading-[2.25] 2xl:leading-[1.8]"
                       ref={musicTrackInputRef}
                       onChange={(e) =>
                         form.setValue("musicTrack", e.target.files?.[0])
@@ -86,14 +86,14 @@ export const SettingsForm = ({ setOpen }) => {
           <Button
             variant="outline"
             type="submit"
-            className="focus font-400 cursor-pointer font-normal"
+            className="focus font-400 cursor-pointer bg-black font-normal"
           >
             Save
           </Button>
           <Button
             type="button"
             variant="outline"
-            className="focus font-400 cursor-pointer font-normal"
+            className="focus font-400 cursor-pointer bg-black font-normal"
             onClick={() => resetForm(setOpen)}
           >
             Reset

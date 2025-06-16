@@ -26,7 +26,7 @@ export const MusicPlayer = () => {
   return (
     <div className="flex w-full gap-4">
       <div className="rounded-container 3xl:py-7 4xl:py-8 flex-1 rounded-full py-3 xl:py-4 2xl:py-6">
-        <div className="mx-auto w-[85%] space-y-2 2xl:space-y-3">
+        <div className="mx-auto w-[80%] space-y-2 2xl:space-y-3">
           <p
             className={`font-400 text-left ${!musicTrackNameWithoutExtension ? "text-muted-foreground" : ""}`}
           >
