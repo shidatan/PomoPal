@@ -54,14 +54,14 @@ export const useSettingsForm = () => {
     setTimerState({
       ...INITIAL_TIMER_STATE,
       intervalCount: parseInt(intervalCount, 10),
-      totalWorkSeconds: parseInt(totalWorkMinutes, 10) * 60,
-      // totalWorkSeconds: 10,
-      totalBreakSeconds: parseInt(totalBreakMinutes, 10) * 60,
-      // totalBreakSeconds: 5,
-      remainingWorkSeconds: parseInt(totalWorkMinutes, 10) * 60,
-      // remainingWorkSeconds: 10,
-      remainingBreakSeconds: parseInt(totalBreakMinutes, 10) * 60,
-      // remainingBreakSeconds: 5,
+      // totalWorkSeconds: parseInt(totalWorkMinutes, 10) * 60,
+      totalWorkSeconds: 10,
+      // totalBreakSeconds: parseInt(totalBreakMinutes, 10) * 60,
+      totalBreakSeconds: 5,
+      // remainingWorkSeconds: parseInt(totalWorkMinutes, 10) * 60,
+      remainingWorkSeconds: 10,
+      // remainingBreakSeconds: parseInt(totalBreakMinutes, 10) * 60,
+      remainingBreakSeconds: 5,
       musicTrack: musicTrack,
     });
 
